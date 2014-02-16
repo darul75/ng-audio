@@ -1,14 +1,15 @@
 !!!
 doctype 5
 html(xmlns='http://www.w3.org/1999/xhtml', xmlns:og='http://ogp.me/ns#', xmlns:fb='http://ogp.me/ns/fb#')
- head  
+ head
+  link(rel='stylesheet',href='/stylesheets/ng-audio.css')  
   link(rel='stylesheet',href='/stylesheets/prism.css')
   link(rel='stylesheet',href='/stylesheets/stylesheet.css')
   link(rel='stylesheet',href='/bower_components/ngprogress/ngProgress.css')
   script(type='text/javascript', src='https://code.jquery.com/jquery-latest.js')
   script(type='text/javascript', src='/bower_components/angular/angular.min.js')  
   script(type='text/javascript', src='/javascripts/ng-audio.js')  
-  script(type="text/javascript", src="/bower_components/ngprogress/build/ngProgress.min.js") 
+  //- script(type="text/javascript", src="/bower_components/ngprogress/build/ngProgress.min.js") 
   title Capture website with your resolution and device (Iphone, IPad, Android...whatever)   
   body
 
@@ -21,13 +22,8 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:og='http://ogp.me/ns#', xmlns:f
     <!-- HEADER -->
     div.outer(id="header_wrap")
       header
-        h1(id="project_title") CaptureWeb
-        p Capture some website as image/pdf with your resolution. Happy 2014 !
-        //- ul
-        //-   li
-        //-     a(href="https://github.com/darul75/captureweb/")
-        //-       p View on 
-        //-         strong GitHub
+        h1(id="project_title") Ng-audio
+        p AngularJS audio control directive        
       <!-- MAIN CONTENT -->
     div.outer(id="main_content_wrap")
       section.inner(id="main_content")
@@ -35,13 +31,9 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:og='http://ogp.me/ns#', xmlns:f
           a(name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages")
             span.octicon.octicon-link
           p Welcome
-
-        p 1. Capture any page from the web with different resolutions
-        p 2. Save it as a pdf or png file
+        p I guess you know how to use it        
 
         div(audio, options='options')        
-
-        div(captureweb, url="url")
 
         div
           script(data-gittip-username="darul75" data-gittip-widget="button" src="//gttp.co/v1.js")

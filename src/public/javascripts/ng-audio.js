@@ -1,6 +1,6 @@
 (function (angular) {
 'use strict';	
-
+	//http://www.html5rocks.com/en/tutorials/webaudio/intro/?redirect_from_locale=fr
 	angular.module('ngAudio', [])					
 		// DIRECTIVE
 		.directive('audio', ['$timeout', function(timeout) {
@@ -8,35 +8,33 @@
 				restrict : 'AE',
 				scope: { ngModel:'=', options:'=' },
 				template: 
-					'<button ng-click="play(0)">Test</button><span ng-class="mainSliderClass" id="{{sliderTmplId}}">' +
-						'<table><tr><td>' +
-							'<div class="jslider-bg">' +
-								'<i class="l"></i><i class="f"></i><i class="r"></i>' +
-								// '<i class="v"></i>' +
-							'</div>' +
-
-							'<div class="jslider-pointer"></div>' +
-							'<div class="jslider-pointer jslider-pointer-to"></div>' +
-
-							'<div class="jslider-label"><span ng-bind-html="from"></span></div>' +
-							'<div class="jslider-label jslider-label-to"><span ng-bind-html="to"></span>{{options.dimension}}</div>' +
-
-							'<div class="jslider-value"><span></span>{{options.dimension}}</div>' +
-							'<div class="jslider-value jslider-value-to"><span></span>{{options.dimension}}</div>' +
-
-							'<div class="jslider-scale" id="{{sliderScaleDivTmplId}}"></div>' +
-
-						'</td></tr></table>' +
-					'</span>',
+					  '<div ng-click="play(0)" class="play_border" ng-show="loaded && !running">'    
+					+	'<div class="play_button"></div>'					
+					+ '</div><div ng-click="stop(0)" class="play_border" ng-show="loaded && running">'    
+					+	'<div class="pause_button"></div>'					
+					+ '</div>',
 				link : function(scope, element, attrs) {
 
 					scope.play = function(idx) {						
+						if (scope.running)
+							return;
+						scope.source = scope.context.createBufferSource(); 	// creates a sound source
+						scope.source.buffer = scope.bufferList[idx];     			// tell the source which sound to play
+						scope.source.connect(scope.context.destination);       	// connect the source to the context's destination (the speakers)						
+  						scope.source.loop = true;	// Start playback in a loop
+  						  if (!scope.source.start)
+    						scope.source.start = source.noteOn;
+						scope.source.start(0); 	// play the source now // note: on older systems, may have to use deprecated noteOn(time);
+						scope.running = true;							
+					};
 
-						var source = scope.context.createBufferSource(); 	// creates a sound source
-						source.buffer = scope.bufferList[idx];     			// tell the source which sound to play
-						source.connect(scope.context.destination);       	// connect the source to the context's destination (the speakers)
-						source.start(0);                           			// play the source now
-                        // note: on older systems, may have to use deprecated noteOn(time);
+					scope.stop = function(idx) {
+						if (!scope.running)
+							return;
+						if (!scope.source.stop)
+    						scope.source.stop = scope.source.noteOff;
+						scope.source.stop(0);
+						scope.running = false;
 					};
 
 					scope.load = function(urls) {
@@ -49,10 +47,11 @@
 					scope.finishedLoading = function(bufferList) {
 
 						scope.bufferList = bufferList;
+						timeout(function() {
+							scope.loaded = true;	
+						});					
 
 					};
-
-					var audioSupported = false;
 
 					scope.init = function() {
 
@@ -60,19 +59,13 @@
 							// Fix up for prefixing
 							var AudioContext = window.AudioContext||window.webkitAudioContext;
 							scope.context = new AudioContext();
-							audioSupported = true;							
+							scope.load(scope.options.playlist);					
 						}
 						catch(e) {
-							alert('Web Audio API is not supported in this browser');
+							console.log('Web Audio API is not supported in this browser');
 						}
 
-					};
-
-					timeout(function() {
-						if (audioSupported)
-							scope.load(scope.options.playlist);
-
-					}, 1000);					
+					};										
 
 					scope.init();					
 				}

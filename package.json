@@ -1,12 +1,12 @@
 {
   "name": "ng-audio",
-  "description": "AngularJS directive audio control.",
+  "description": "AngularJS audio control directive.",
   "version": "0.0.1",
   "author": {
     "name": "Julien Valéry",
     "email": "darul75@gmail.com"
   },
-  "filename": "./src/ng-audio.js",
+  "filename": "./src/public/javascripts/ng-audio.js",
   "homepage": "https://github.com/darul75/ng-audio",
   "repository": {
     "type": "git",

@@ -54,7 +54,7 @@ module.exports = function(grunt) {
       },
       compress: {
         files: {          
-          'dist/css/ng-audio.min.css': ['src/css/ng-audio.css', 'src/css/ng-audio.round.css']
+          'dist/css/ng-audio.min.css': ['src/public/stylesheets/ng-audio.css']
         }
       }
     },

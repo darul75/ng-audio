@@ -1,28 +1,23 @@
 {
-  "name": "ng-slider",
-  "version": "0.0.5",
+  "name": "ng-audio",
+  "version": "0.0.1",
   "author": {
     "name": "Julien Valéry",
     "email": "darul75@gmail.com"
   },  
-  "homepage": "https://github.com/darul75/ng-slider",
+  "homepage": "https://github.com/darul75/ng-audio",
   "repository": {
     "type": "git",
-    "url": "https://github.com/darul75/ng-slider.git"
+    "url": "https://github.com/darul75/ng-audio.git"
   },
   "keywords": [
     "angular",
-    "slider",
+    "audio",
     "control",
     "ui"    
   ],
-  "main": "./src/ng-slider.js",
+  "main": "./src/public/javascripts/ng-audio.js",
   "dependencies": {
-    "angular": "1.2.x",    
-    "angular-sanitize": "1.2.x",
-    "jquery": "latest"    
-  },
-  "devDependencies": {
-    "angular-mocks": "1.2.x"
+    "angular": "1.2.x"        
   }
 }
