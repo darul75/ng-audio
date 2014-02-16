@@ -7,24 +7,23 @@
 			return {
 				restrict : 'AE',
 				scope: { ngModel:'=', options:'=' },
-				template: 
-					  '<div ng-click="play(0)" class="play_border" ng-show="loaded && !running">'    
-					+	'<div class="play_button"></div>'					
-					+ '</div><div ng-click="stop(0)" class="play_border" ng-show="loaded && running">'    
-					+	'<div class="pause_button"></div>'					
-					+ '</div>',
+				template: '<div ng-click="play(0)" class="play_border" ng-show="loaded && !running">' +
+					'<div class="play_button"></div>' +
+					'</div><div ng-click="stop(0)" class="play_border" ng-show="loaded && running">' +
+					'<div class="pause_button"></div>' +
+					'</div>',
 				link : function(scope, element, attrs) {
 
 					scope.play = function(idx) {						
 						if (scope.running)
 							return;
-						scope.source = scope.context.createBufferSource(); 	// creates a sound source
-						scope.source.buffer = scope.bufferList[idx];     			// tell the source which sound to play
-						scope.source.connect(scope.context.destination);       	// connect the source to the context's destination (the speakers)						
-  						scope.source.loop = true;	// Start playback in a loop
-  						  if (!scope.source.start)
-    						scope.source.start = source.noteOn;
-						scope.source.start(0); 	// play the source now // note: on older systems, may have to use deprecated noteOn(time);
+						scope.source = scope.context.createBufferSource();	// creates a sound source
+						scope.source.buffer = scope.bufferList[idx];		// tell the source which sound to play
+						scope.source.connect(scope.context.destination);	// connect the source to the context's destination (the speakers)
+						scope.source.loop = true;	// Start playback in a loop
+						if (!scope.source.start)
+							scope.source.start = source.noteOn;
+						scope.source.start(0);	// play the source now // note: on older systems, may have to use deprecated noteOn(time);
 						scope.running = true;							
 					};
 
@@ -32,29 +31,25 @@
 						if (!scope.running)
 							return;
 						if (!scope.source.stop)
-    						scope.source.stop = scope.source.noteOff;
+							scope.source.stop = scope.source.noteOff;
 						scope.source.stop(0);
 						scope.running = false;
 					};
 
 					scope.load = function(urls) {
-
 						scope.bufferLoader = new BufferLoader(scope.context, urls, scope.finishedLoading);
-						scope.bufferLoader.load();						
-
+						scope.bufferLoader.load();
 					};
 
-					scope.finishedLoading = function(bufferList) {
-
+					scope.finishedLoading = function(err, bufferList) {
+						if (err && console) {console.error(err);return;}							
 						scope.bufferList = bufferList;
 						timeout(function() {
 							scope.loaded = true;	
-						});					
-
+						});
 					};
 
 					scope.init = function() {
-
 						try {
 							// Fix up for prefixing
 							var AudioContext = window.AudioContext||window.webkitAudioContext;
@@ -62,11 +57,10 @@
 							scope.load(scope.options.playlist);					
 						}
 						catch(e) {
-							console.log('Web Audio API is not supported in this browser');
+							if (console)
+								console.log('Web Audio API is not supported in this browser');
 						}
-
-					};										
-
+					};
 					scope.init();					
 				}
 			};
@@ -74,21 +68,21 @@
 
 
 	function BufferLoader(context, urlList, callback) {
-	  this.context = context;
-	  this.urlList = urlList;
-	  this.onload = callback;
-	  this.bufferList = new Array();
-	  this.loadCount = 0;
+		this.context = context;
+		this.urlList = urlList;
+		this.onload = callback;
+		this.bufferList = new Array();
+		this.loadCount = 0;
 	}
 
 	BufferLoader.prototype.loadBuffer = function(url, index) {
 		// Load buffer asynchronously
 		var xhr = new XMLHttpRequest();
 
-		if ("withCredentials" in xhr) {
+		if ('withCredentials' in xhr) {
 			// XHR for Chrome/Firefox/Opera/Safari.
 			xhr.open('GET', url, true);
-		} else if (typeof XDomainRequest != "undefined") {
+		} else if (typeof XDomainRequest != 'undefined') {
 			// XDomainRequest for IE.
 			xhr = new XDomainRequest();
 			xhr.open(method, url);
@@ -96,32 +90,31 @@
 			// CORS not supported.
 		}
     
-		xhr.open("GET", url, true);
-		xhr.responseType = "arraybuffer";
+		xhr.open('GET', url, true);
+		xhr.responseType = 'arraybuffer';
 
 		var loader = this;
 
 		xhr.onload = function() {
 			// Asynchronously decode the audio file data in request.response
-			loader.context.decodeAudioData(
-			  xhr.response,
+			loader.context.decodeAudioData(xhr.response,
 			  function(buffer) {
-			    if (!buffer) {
-			      alert('error decoding file data: ' + url);
-			      return;
+				if (!buffer) {
+					this.onload('error decoding file data: ' + url);
+					return;
 			    }
-			    loader.bufferList[index] = buffer;
-			    if (++loader.loadCount == loader.urlList.length)
-			      loader.onload(loader.bufferList);
+				loader.bufferList[index] = buffer;
+				if (++loader.loadCount == loader.urlList.length)
+					loader.onload(null, loader.bufferList);
 			  },
 			  function(error) {
-			    console.error('decodeAudioData error', error);
+				this.onload('decodeAudioData error' + error);
 			  }
 			);
 		}
 
 		xhr.onerror = function() {
-			alert('BufferLoader: XHR error');
+			this.onload('BufferLoader: XHR error');
 		}
 
 		xhr.send();
