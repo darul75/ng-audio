@@ -1,4 +1,4 @@
-Ng-audio [![NPM version](https://badge.fury.io/js/ng-audio.png)](http://badge.fury.io/js/ng-audio) [![Build Status](https://travis-ci.org/darul75/ng-audio.png?branch=master)](https://travis-ci.org/darul75/ng-slider) [![Total views](https://sourcegraph.com/api/repos/github.com/darul75/ng-audio/counters/views.png)](https://sourcegraph.com/github.com/darul75/ng-audio)
+Ng-audio [![NPM version](https://badge.fury.io/js/ng-audio.png)](http://badge.fury.io/js/ng-audio) [![Build Status](https://travis-ci.org/darul75/ng-audio.png?branch=master)](https://travis-ci.org/darul75/ng-audio) [![Total views](https://sourcegraph.com/api/repos/github.com/darul75/ng-audio/counters/views.png)](https://sourcegraph.com/github.com/darul75/ng-audio)
 =====================
 
 Angular audio control directive.
