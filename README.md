@@ -16,6 +16,10 @@ Sceenshot
 ![angular audio demo](http://darul75.github.io/ng-slider/images/pause.png "angular audio demo screenshot")
 ![angular audio demo](http://darul75.github.io/ng-slider/images/play.png "angular audio demo screenshot")
 
+Demo
+-------------
+http://darul-demo.herokuapp.com/audio
+
 Installation
 ------------
 
