@@ -41,7 +41,8 @@ html(xmlns='http://www.w3.org/1999/xhtml', xmlns:og='http://ogp.me/ns#', xmlns:f
             var app = angular.module('myApp', ['ngAudio']);
             function ctrl($scope, $filter) {      
               $scope.options = {
-                playlist: ['/sound/SoundHelix-Song-1.mp3', '/sound/SoundHelix-Song-1.mp3']
+                playlist: ['/sound/SoundHelix-Song-1.mp3', '/sound/SoundHelix-Song-1.mp3'],
+                loop: true
               };
             }
 

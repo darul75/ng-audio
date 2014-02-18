@@ -14,13 +14,17 @@
 					'</div>',
 				link : function(scope, element, attrs) {
 
+					var o = {loop:false};
+
+					angular.extend(o, scope.options);
+
 					scope.play = function(idx) {						
 						if (scope.running)
 							return;
 						scope.source = scope.context.createBufferSource();	// creates a sound source
 						scope.source.buffer = scope.bufferList[idx];		// tell the source which sound to play
 						scope.source.connect(scope.context.destination);	// connect the source to the context's destination (the speakers)
-						scope.source.loop = true;	// Start playback in a loop
+						scope.source.loop = o.loop;	// Start playback in a loop
 						if (!scope.source.start)
 							scope.source.start = source.noteOn;
 						scope.source.start(0);	// play the source now // note: on older systems, may have to use deprecated noteOn(time);
