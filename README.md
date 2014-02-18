@@ -74,7 +74,7 @@ $scope.options = {
 Options for your audio in json format {playlist:.....}
 
 * `playlist`: list of sound url to load ( CORS, so be careful delivered by your server )
-* `loop`: loop sound
+* `loop`: loop sound, default false
 * `start`: TODO : start sound
 
 ### Build
