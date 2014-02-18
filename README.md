@@ -10,6 +10,12 @@ Why
 
 Your want some background music on your website.
 
+Sceenshot
+-------------
+
+![angular audio demo](http://darul75.github.io/ng-slider/images/pause.png "angular audio demo screenshot")
+![angular audio demo](http://darul75.github.io/ng-slider/images/play.png "angular audio demo screenshot")
+
 Installation
 ------------
 
