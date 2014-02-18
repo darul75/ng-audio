@@ -67,7 +67,7 @@ $scope.options = {
 
 ### Options
 
-Options for your slider in json format {from:.....}
+Options for your audio in json format {playlist:.....}
 
 * `playlist`: list of sound url to load ( CORS, so be careful delivered by your server )
 * `loop`: loop sound
