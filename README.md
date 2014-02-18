@@ -1,14 +1,14 @@
 Ng-audio [![NPM version](https://badge.fury.io/js/ng-audio.png)](http://badge.fury.io/js/ng-audio) [![Build Status](https://travis-ci.org/darul75/ng-audio.png?branch=master)](https://travis-ci.org/darul75/ng-slider) [![Total views](https://sourcegraph.com/api/repos/github.com/darul75/ng-audio/counters/views.png)](https://sourcegraph.com/github.com/darul75/ng-audio)
 =====================
 
-Angular audio control directive..
+Angular audio control directive.
 
 Now that we can play with webaudio html5 api, here a small directive.
 
 Why
 -------------
 
-Your want some background music on your website.
+Your want some background music on your website. Start/Stop buttons included.
 
 Sceenshot
 -------------
