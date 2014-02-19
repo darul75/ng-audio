@@ -60,7 +60,7 @@ and then just add an `div` with `audio` directive name attribute, `options` scop
 <div audio options="options" />
 ```
 
-'options' slider scope options value as json.
+'options' audio scope options value as json.
 
 ```javascript
 $scope.options = {
